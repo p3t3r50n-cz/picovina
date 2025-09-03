@@ -1,0 +1,18 @@
+[Unit]
+Description=Pi battery monitor
+After=multi-user.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/pi-battery
+StandardOutput=null
+StandardError=journal
+Environment=LC_ALL=C
+Environment=TERM=dumb
+Restart=always
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target

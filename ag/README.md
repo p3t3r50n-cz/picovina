@@ -23,8 +23,7 @@ Instead of typing these long commands, you can use short aliases.
 
 First, create the symlinks:
 
-```
-bash
+```bash
 ag syminstall
 ```
 

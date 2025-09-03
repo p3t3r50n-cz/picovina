@@ -1,0 +1,13 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "rockchip,rk3588-orangepi-5-max";
+
+    fragment@0 {
+        target-path = "/usbdrd3_0/usb@fc000000";
+        __overlay__ {
+            dr_mode = "host";
+        };
+    };
+};

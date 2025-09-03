@@ -9,7 +9,9 @@ BAT_CELL_CAPACITY=2600
 BAT_VOLTAGE_HIGH=4128
 BAT_VOLTAGE_LOW=3100
 VOLTAGE_HYSTERESIS=50  # mV hysteresis for full charge detection
-BAT_FULL_CLAMP=100
+BAT_FULL_CLAMP=99
+THRESHOLD_DISCHARGE_mV=-3.0
+THRESHOLD_CHARGE_mV=0.2
 
 I2C_BUS=2
 I2C_ADDR=0x41
@@ -195,9 +197,7 @@ while true; do
 	calibrate_battery "$bus_voltage" "$charge_now"
 	
 	# Battery status detection with shunt voltage hysteresis
-	threshold1=-3.0
-	threshold2=0.5
-	battery_status_int=$(awk -v x="$shunt_voltage" -v t1="$threshold1" -v t2="$threshold2" 'BEGIN {
+	battery_status_int=$(awk -v x="$shunt_voltage" -v t1="$THRESHOLD_DISCHARGE_mV" -v t2="$THRESHOLD_CHARGE_mV" 'BEGIN {
 		if (x < t1) print 2        # discharging
 		else if (x > t2) print 1    # charging  
 		else print 0               # full or small current

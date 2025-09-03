@@ -47,7 +47,7 @@ BAT_CELLS = 3
 BAT_CELL_CAPACITY_mAh = 2600
 BAT_VOLTAGE_HIGH_mV = 4128
 BAT_VOLTAGE_LOW_mV = 3100
-BAT_FULL_CLAMP = 100
+BAT_FULL_CLAMP = 99
 VOLTAGE_HYSTERESIS_mV = 50  # per cell, for full-charge detection
 
 I2C_BUS = 2
@@ -75,7 +75,7 @@ CALIBRATION_INTERVAL_S = 3600
 
 # Status thresholds (mV across shunt)
 THRESHOLD_DISCHARGE_mV = -3.0
-THRESHOLD_CHARGE_mV = 0.5
+THRESHOLD_CHARGE_mV = 0.2
 
 # =====================
 # Derived constants

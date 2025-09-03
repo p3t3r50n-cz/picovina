@@ -1,0 +1,143 @@
+#!/bin/bash
+#
+# ag - simple apt/apt-get/apt-cache wrapper
+#
+
+SCRIPT_NAME="$(basename "$0")"
+
+# ===================== Functions =====================
+
+install() {
+    sudo apt install "$@"
+}
+
+update() {
+    sudo apt update "$@"
+}
+
+upgrade() {
+    sudo apt upgrade "$@"
+}
+
+fullupgrade() {
+    sudo apt full-upgrade "$@"
+}
+
+remove() {
+    sudo apt remove "$@"
+}
+
+clean() {
+    sudo apt clean "$@"
+}
+
+autoclean() {
+    sudo apt autoclean "$@"
+}
+
+autoremove() {
+    sudo apt autoremove "$@"
+}
+
+purge() {
+    sudo apt remove --purge "$@"
+}
+
+search() {
+    apt-cache search "$@"
+}
+
+list() {
+    apt list "$@"
+}
+
+upgradable() {
+    list --upgradable "$@"
+}
+
+syminstall() {
+    local target_dir
+    target_dir="$(dirname "$0")"
+
+    cd "$target_dir" || exit 1
+
+    ln -sf ag agi
+    ln -sf ag agu
+    ln -sf ag agup
+    ln -sf ag agfup
+    ln -sf ag agr
+    ln -sf ag agc
+    ln -sf ag agac
+    ln -sf ag agar
+    ln -sf ag agrp
+    ln -sf ag ags
+    ln -sf ag agl
+    ln -sf ag aglu
+
+    echo "Symlinks created in $target_dir:"
+    ls -l agi agu agup agfup agr agc agac agar agrp ags agl aglu
+}
+
+help() {
+    echo "ag - simple apt wrapper"
+    echo
+    echo "Available arguments:"
+    echo "  $SCRIPT_NAME install     -> sudo apt install"
+    echo "  $SCRIPT_NAME update      -> sudo apt update"
+    echo "  $SCRIPT_NAME upgrade     -> sudo apt upgrade"
+    echo "  $SCRIPT_NAME fullupgrade -> sudo apt full-upgrade"
+    echo "  $SCRIPT_NAME remove      -> sudo apt remove"
+    echo "  $SCRIPT_NAME clean       -> sudo apt clean"
+    echo "  $SCRIPT_NAME autoclean   -> sudo apt autoclean"
+    echo "  $SCRIPT_NAME autoremove  -> sudo apt autoremove"
+    echo "  $SCRIPT_NAME purge       -> sudo apt remove --purge"
+    echo "  $SCRIPT_NAME search      -> apt-cache search"
+    echo "  $SCRIPT_NAME list        -> apt list"
+    echo "  $SCRIPT_NAME upgradable  -> apt list --upgradable"
+    echo "  $SCRIPT_NAME syminstall  -> create symlinks for shortcuts"
+    echo "  $SCRIPT_NAME help        -> show this help message"
+    echo
+    echo "Available commands if \`ag syminstall\` was done:"
+    echo "  agi        -> sudo apt install"
+    echo "  agu        -> sudo apt update"
+    echo "  agup       -> sudo apt upgrade"
+    echo "  agfup      -> sudo apt full-upgrade"
+    echo "  agr        -> sudo apt remove"
+    echo "  agc        -> sudo apt clean"
+    echo "  agac       -> sudo apt autoclean"
+    echo "  agar       -> sudo apt autoremove"
+    echo "  agrp       -> sudo apt remove --purge"
+    echo "  ags        -> apt-cache search"
+    echo "  agl        -> apt list"
+    echo "  aglu       -> apt list --upgradable"
+    echo "  syminstall -> create symlinks for shortcuts"
+    echo "  help       -> show this help message"
+}
+
+# ===================== Main logic =====================
+
+case "$SCRIPT_NAME" in
+    ag)
+        if [ $# -eq 0 ]; then
+            echo "Error: You must provide at least one argument."
+            help
+            exit 1
+        else
+            "$@"
+        fi
+        ;;
+    agi)       install "$@" ;;
+    agu)       update "$@" ;;
+    agup)      upgrade "$@" ;;
+    agfup)     fullupgrade "$@" ;;
+    agr)       remove "$@" ;;
+    agc)       clean "$@" ;;
+    agac)      autoclean "$@" ;;
+    agar)      autoremove "$@" ;;
+    agrp)      purge "$@" ;;
+    ags)       search "$@" ;;
+    agl)       list "$@" ;;
+    aglu)      list --upgradable "$@" ;;
+    help)      help ;;
+    *)         echo "Unknown command: $SCRIPT_NAME"; help ;;
+esac

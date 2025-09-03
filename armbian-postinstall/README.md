@@ -90,3 +90,23 @@ EndSection
 ```
 
 See file: [11-touch-rotate.conf](./11-touch-rotate.conf)
+
+## After every armbian kernel update...
+
+... is lost DKMS package for `bcmdhd-sdio` wireless driver. Luckile re-adding wifi support is very easy:
+
+```bash
+dkms install -m bcmdhd-sdio -v 101.10.591.52.27-5
+```
+
+And from now you have wifi again ;-) You can check with:
+```bash
+dkms status
+```
+
+resulting in:
+```bash
+bcmdhd-sdio/101.10.591.52.27-5, 6.1.115-vendor-rk35xx, aarch64: installed
+```
+
+Note: There are `bcmdhd-sdio` sources in `/usr/src/bcmdhd-sdio-101.10.591.52.27-5` with `dkms.conf`

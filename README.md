@@ -1,9 +1,10 @@
-# picovina
-A software suite for my custom cyberdeck project based on the **Orange Pi 5 MAX** running **Armbian**.
+# About Pičovina
 
 **Project name: "Pičovina"** (pronounced */pee-CHO-vi-na/*)
 
-> The name comes from the prefix "Pi", commonly used for projects based on SBCs like Raspberry Pi, Orange Pi, etc. In my native language, the word “pičovina” can loosely mean “a somewhat useless thing,” although in this project I do see some practical use!
+> The name "Pičovina" is a playful blend of the "Pi" prefix, commonly associated with single-board computer projects like Raspberry Pi, Orange Pi, Banana Pi etc, and a colloquial term from my native language, which humorously refers to something that's perhaps not entirely useful. Despite the tongue-in-cheek name, this project serves a practical purpose.
+
+A software suite for my custom cyberdeck project based on the **Orange Pi 5 MAX** running **Armbian**.
 
 This repository will gradually include system configurations, kernel modules, scripts, services, and optimization guides as they become available. It is also adaptable to other single-board computers, such as Raspberry Pi, Radxa, and more.
 

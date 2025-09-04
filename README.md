@@ -3,6 +3,9 @@ A software suite for my custom cyberdeck project based on the **Orange Pi 5 MAX*
 
 This repository will gradually include system configurations, kernel modules, scripts, services, and optimization guides as they become available. It is also adaptable to other single-board computers, such as Raspberry Pi, Radxa, and more.
 
+![Picovina v0.1](./images/picovina-v0.1.jpg)
+*For a quick idea of the project setup – still in the very first functional version, but I have some new ideas for improvements*
+
 # Armbian Postinstall
 Post-installation steps after a fresh Armbian setup.
 

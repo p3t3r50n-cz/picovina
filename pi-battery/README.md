@@ -48,6 +48,12 @@ cp pi-battery.ko /usr/lib/modules/
 insmod /lib/modules/pi-battery.ko
 ```
 
+For automatic module loading edit `/etc/rc.local` and append:
+
+```bash
+insmod /lib/modules/pi-battery.ko &
+```
+
 After this, the device `/dev/pi_battery` should be created. You can write values to it like:
 
 ```bash

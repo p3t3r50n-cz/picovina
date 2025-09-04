@@ -7,9 +7,11 @@ A background service queries the INA219 chip over I²C and updates the kernel mo
 
 ## Tested Configuration
 - **Board**: Orange Pi 5 MAX  
-- **UPS Module**: Waveshare UPS Module 3S  
+- **UPS Module**: Waveshare UPS Module 3S (3x 18650 2600mAh - total 7800 mAh)
 - **OS**: Armbian (25.11.0-trunk.118 bookworm) with vendor kernel (6.1.115-vendor-rk35xx)
   - **Desktop**: Trinity Desktop Environment R14 (Yes, I'm an old-fashioned guy and I like the old ways. That's why I stuck with the good old KDE3)
+
+With this setup, I have tested a battery runtime of approximately **12–15 hours** during my typical daily-task usage (coding, web browsing, office tasks).
 
 # Features
 - Single battery support (simplified from original dual-battery design)

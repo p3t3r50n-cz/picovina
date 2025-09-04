@@ -1,6 +1,6 @@
 # About Pičovina
 
-**Project name: "Pičovina"** (pronounced */pee-CHO-vi-na/*)
+**Project name: "Pičovina"** (pronounced /ˈpɪ.tʃo.vi.na/)
 
 > The name "Pičovina" is a playful blend of the "Pi" prefix, commonly associated with single-board computer projects like Raspberry Pi, Orange Pi, Banana Pi etc, and a colloquial term from my native language, which humorously refers to something that's perhaps not entirely useful. Despite the tongue-in-cheek name, this project serves a practical purpose.
 

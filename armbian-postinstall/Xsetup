@@ -1,0 +1,54 @@
+#! /bin/bash
+# Xsetup - run as root before the login dialog appears
+
+#xconsole -geometry 480x130-0-0 -notify -verbose -fn fixed -exitOnFail -file /dev/xconsole &
+
+XAUTH=`find /var/run/xauth/ -type f | head -n1`
+
+export DISPLAY=:0
+export XAUTHORITY="$XAUTH"
+
+# Set screen scaling
+
+SCALE=0.5
+NATIVE_X=1920
+NATIVE_Y=1080
+SCALED_X=`awk -v x=$NATIVE_X -v s=$SCALE 'BEGIN { printf "%.0f", x*s}'`
+SCALED_Y=`awk -v x=$NATIVE_Y -v s=$SCALE 'BEGIN { printf "%.0f", x*s}'`
+
+/usr/bin/xrandr --output HDMI-1 --scale ${SCALE}x${SCALE}
+
+# Wait for TDM login screen a center window
+
+WIN_ID=""
+COUNT=0
+MAX_ATTEMPTS=50
+
+( while [ -z "$WIN_ID" ] && [ $COUNT -lt $MAX_ATTEMPTS ]; do
+
+   [ ! -f /usr/bin/wmctrl ] && break
+   [ ! -f /usr/bin/xwininfo ] && break
+
+    WIN_ID=$(/usr/bin/wmctrl -lx | awk '/tdmgreet.Tdmgreet/ {print $1}')
+    if [ -n "$WIN_ID" ]; then
+
+	# Get window size
+	read WW WH <<< $(xwininfo -id "$WIN_ID" | awk '
+		/Width:/ {w=$2}
+		/Height:/ {h=$2}
+		END {print w, h}')
+
+		# Calc centered position
+		X=$(( (SCALED_X - WW) / 2 ))
+		Y=$(( (SCALED_Y - WH) / 2 ))
+
+		# Move window
+		/usr/bin/wmctrl -i -r "$WIN_ID" -e "0,$X,$Y,-1,-1"
+
+        break
+    fi
+
+    COUNT=$((COUNT+1))
+    sleep 0.1
+
+done ) &

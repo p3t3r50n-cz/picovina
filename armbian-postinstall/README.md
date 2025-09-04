@@ -90,3 +90,24 @@ EndSection
 ```
 
 See file: [11-touch-rotate.conf](./11-touch-rotate.conf)
+
+## Screen Scaling
+
+The 5.5" display with 1920x1080 resolution looks really nice, but it doesn't play well with the small screen size and desktop workspace. Therefore, scaling needs to be addressed.
+
+Since my project uses the good old gold **Trinity** desktop and the **TDM display manager**, which relies on Xorg, we can't use Wayland features - but that's fine, it can still be handled.
+
+Xorg itself doesn’t provide a configuration option for display scaling or transformation (except for some Nvidia cards that might support it), but we can apply a small hack in the `/etc/trinity/tdm/Xsetup` file using `xrandr` to scale the display.
+
+Because TDM reads the **real** resolution, not the **scaled** one, the login dialog initially aligns to the bottom right (it tries to center based on the original resolution). We can fix this by also modifying `/etc/trinity/tdm/Xsetup` and using the `wmctrl` utility to nicely center the login dialog.
+
+**NOTE:** The `/etc/trinity/tdm/Xsetup` script uses some Bash-specific features that plain `sh` doesn’t support. Therefore, change the shebang from `#!/bin/sh` to `#!/bin/bash`.
+
+See file: [Xsetup](./Xsetup)
+
+Installation is very easy — just copy `Xsetup` to `/etc/trinity/tdm/Xsetup` (make sure you have a backup of the original file):
+
+```bash
+mv /etc/trinity/tdm/Xsetup /etc/trinity/tdm/Xsetup.bak
+cp Xsetup /etc/trinity/tdm/Xsetup
+```

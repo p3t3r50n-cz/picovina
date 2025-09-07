@@ -43,7 +43,7 @@ With this setup, I have tested a battery runtime of approximately **12–15 hour
 
 ```bash
 cd pi_battery_module  
-make install  
+make  
 cp pi-battery.ko /usr/lib/modules/
 insmod /lib/modules/pi-battery.ko
 ```
